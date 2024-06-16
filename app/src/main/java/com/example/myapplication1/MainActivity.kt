@@ -7,6 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -22,6 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplication1Theme {
                MainContent()
+
             }
         }
     }
@@ -30,11 +33,18 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContent()
 {
+    Box(modifier = Modifier.fillMaxSize())
+    {
+        TabLayout()
 
-       TabLayout()
-            Buut()
-
-}
+    FloatingActionButton(onClick = { /*TODO*/ },
+        containerColor = Color.Yellow,
+        modifier = Modifier
+            .align(Alignment.BottomEnd)
+            .padding(15.dp)){
+        Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Black)
+    }
+}}
 @Composable
 fun TabLayout() {
     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -45,8 +55,8 @@ fun TabLayout() {
         TabRow(
             selectedTabIndex,
             modifier = Modifier.fillMaxWidth(),
-            containerColor = Color.Magenta,
-            contentColor = Color.Yellow,
+            containerColor = Color.Black,
+            contentColor = Color.White,
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
@@ -87,8 +97,9 @@ Column(
             modifier = Modifier
                 .padding(16.dp)
                 .height(48.dp)
+                .background(Color.Gray)
                 .width(200.dp),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
     ) {
         Text(text = "+")
 
@@ -98,6 +109,6 @@ Column(
 @Composable
 fun DefaultPreview() {
     MyApplication1Theme {
-        TabLayout()
+        MainContent()
     }
 }
