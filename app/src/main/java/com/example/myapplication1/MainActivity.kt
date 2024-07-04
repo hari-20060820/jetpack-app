@@ -1,8 +1,37 @@
 package com.example.myapplication1
-
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.animation.core.*
+import androidx.compose.ui.unit.dp
+import kotlin.math.PI
 import android.os.Bundle
+
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.rememberInfiniteTransition
+
+import androidx.activity.compose.setContent
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.drawscope.translate
+
+import androidx.compose.ui.unit.dp
+
+
+import android.util.Size
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColor
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -10,15 +39,61 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+
+import androidx.compose.ui.unit.dp
+
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+
+import androidx.compose.ui.res.painterResource
+
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.res.painterResource
+
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.dp
 import com.example.myapplication1.ui.theme.MyApplication1Theme
-
-
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import kotlin.random.Random
 @ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +101,7 @@ class MainActivity : ComponentActivity() {
         val repository = FoodRepository(context = applicationContext)
 
         setContent {
-            MyApplication1Theme {
+            MyApplication1Theme{
                 var selectedTab by remember { mutableStateOf(0) }
                 var showAddFoodItemScreen by remember { mutableStateOf(false) }
                 var foodItems by remember { mutableStateOf(repository.getFoodItems()) }
@@ -73,6 +148,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityPreview() {
     MyApplication1Theme {
+
         // Preview content
     }
 }
@@ -82,7 +158,12 @@ fun FoodScreen(foodItems: List<FoodItem>) {
     val totalPrice = foodItems.sumOf { it.price }
 
     Column {
-        Text("Total Price: $totalPrice", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)
+        Text(
+            "Total Price: $totalPrice",
+            modifier = Modifier.padding(16.dp),
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Italic
+        )
 
         LazyColumn {
             itemsIndexed(foodItems) { index, foodItem ->
@@ -95,12 +176,7 @@ fun FoodScreen(foodItems: List<FoodItem>) {
     }
 }
 
-@Composable
-fun FunScreen() {
-    Column {
-        Text("Fun content goes here",  modifier = Modifier.padding(16.dp))
-    }
-}
+
 
 @Composable
 fun AddFoodItemDialog(repository: FoodRepository, onClose: () -> Unit) {

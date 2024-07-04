@@ -13,6 +13,11 @@
         android:theme="@style/Theme.MyApplication1"
         tools:targetApi="34">
         <activity
+            android:name=".Funscreen"
+            android:exported="false"
+            android:label="@string/title_activity_funscreen"
+            android:theme="@style/Theme.MyApplication1" />
+        <activity
             android:name=".FoodRepository"
             android:exported="false"
             android:label="@string/title_activity_food_repository"
